@@ -1,0 +1,20 @@
+name: Frevo
+description: Deploy yout OpenAPI specification to Frevo
+branding:
+  icon: book-open
+  color: green
+runs:
+  using: node16
+  main: dist/index.js
+inputs:
+  path:
+    required: true
+    description: Path to your OpenAPI specification
+    default: "./openapi.json"
+  frevo_token:
+    required: true
+    description: Your organization's token in Frevo
+  config:
+    required: false
+    description: Path to your Frevo configuration file
+    default: "./frevo.yaml"

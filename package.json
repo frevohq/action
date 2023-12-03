@@ -1,0 +1,22 @@
+{
+  "name": "@frevo/github-action",
+  "version": "0.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "build": "rm -rf dist && tsc"
+  },
+  "keywords": [
+    "api",
+    "diff",
+    "openapi",
+    "documentation"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.10.2",
+    "typescript": "^5.3.2"
+  },
+  "dependencies": {
+    "@actions/core": "^1.10.1"
+  }
+}
