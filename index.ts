@@ -1,4 +1,4 @@
-import { getInput, info,debug } from "@actions/core";
+import { debug, getInput } from "@actions/core";
 
 export async function main() {
   const token = getInput("frevo_token", { required: true });
@@ -15,3 +15,5 @@ export async function main() {
 
   return;
 }
+
+main();
