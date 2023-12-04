@@ -16,7 +16,7 @@ function main() {
         const token = (0, core_1.getInput)("frevo_token", { required: true });
         const path = (0, core_1.getInput)("path", { required: true });
         const config = (0, core_1.getInput)("config", { required: false });
-        (0, core_1.debug)(JSON.stringify({
+        (0, core_1.info)(JSON.stringify({
             token,
             path,
             config,

@@ -1,11 +1,11 @@
-import { debug, getInput } from "@actions/core";
+import { getInput, info } from "@actions/core";
 
 export async function main() {
   const token = getInput("frevo_token", { required: true });
   const path = getInput("path", { required: true });
   const config = getInput("config", { required: false });
 
-  debug(
+  info(
     JSON.stringify({
       token,
       path,
