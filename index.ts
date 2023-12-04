@@ -5,5 +5,11 @@ export async function main() {
   const path = getInput("path", { required: true });
   const config = getInput("config", { required: false });
 
+  console.log({
+    token,
+    path,
+    config,
+  });
+
   return;
 }
