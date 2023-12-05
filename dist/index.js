@@ -21,7 +21,7 @@ function main() {
         const path = (0, core_1.getInput)("path", { required: true });
         const config = (0, core_1.getInput)("config", { required: false });
         const oas = new oas_normalize_1.default(path, { enablePaths: true });
-        yield oas.load();
+        yield oas.deref();
         (0, core_1.info)("OAS Specification loaded. Version: " + (yield oas.version()).version);
         (0, core_1.info)(JSON.stringify(oas));
         return;

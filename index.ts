@@ -8,7 +8,7 @@ export async function main() {
   const config = getInput("config", { required: false });
 
   const oas = new OASNormalize(path, { enablePaths: true });
-  await oas.load();
+  await oas.deref();
 
   info("OAS Specification loaded. Version: " + (await oas.version()).version);
 
