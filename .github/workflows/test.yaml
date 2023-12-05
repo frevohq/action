@@ -15,4 +15,4 @@ jobs:
       - uses: ./
         with:
           frevo_token: "test"
-          path: "./test.yaml"
+          path: "./fixture/1-petstore/openapi.json"
