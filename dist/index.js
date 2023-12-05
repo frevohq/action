@@ -16,7 +16,7 @@ exports.main = void 0;
 const core_1 = require("@actions/core");
 const swagger_parser_1 = __importDefault(require("@apidevtools/swagger-parser"));
 const pako_1 = __importDefault(require("pako"));
-const node_fetch_1 = __importDefault(require("node-fetch"));
+const undici_1 = require("undici");
 const getSizeInMB = (data) => {
     const sizeInBytes = Buffer.byteLength(JSON.stringify(data), "utf8");
     return (sizeInBytes / (1024 * 1024)).toFixed(2);
@@ -39,7 +39,7 @@ function main() {
         const body = pako_1.default.gzip(uint8);
         debug(`compressing done`);
         debug(`uploading`);
-        const response = yield (0, node_fetch_1.default)("https://frevo-api-30.localcan.dev/api/openapi", {
+        const response = yield (0, undici_1.fetch)("https://frevo-api-30.localcan.dev/api/openapi", {
             method: "POST",
             body,
             headers: {

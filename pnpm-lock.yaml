@@ -17,6 +17,9 @@ dependencies:
   pako:
     specifier: ^2.1.0
     version: 2.1.0
+  undici:
+    specifier: ^5.28.2
+    version: 5.28.2
 
 devDependencies:
   '@types/node':

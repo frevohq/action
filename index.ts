@@ -1,7 +1,7 @@
 import { getInput, info, debug as actionDebug } from "@actions/core";
 import parser from "@apidevtools/swagger-parser";
 import pako from "pako";
-import fetch from "node-fetch";
+import { fetch } from "undici";
 
 const getSizeInMB = (data: Record<string, any>) => {
   const sizeInBytes = Buffer.byteLength(JSON.stringify(data), "utf8");
