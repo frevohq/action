@@ -1,18 +1,16 @@
 import { getInput, info } from "@actions/core";
-import OASNormalize from "oas-normalize";
-import OAS from "oas";
+import parser from "@apidevtools/swagger-parser";
 
 export async function main() {
-  const token = getInput("frevo_token", { required: true });
-  const path = getInput("path", { required: true });
-  const config = getInput("config", { required: false });
+  // const token = getInput("frevo_token", { required: true });
+  // const path = getInput("path", { required: true });
+  // const config = getInput("config", { required: false });
 
-  const oas = new OASNormalize(path, { enablePaths: true });
-  await oas.deref();
+  const path = "./fixture/2-petstore-ref/openapi.yaml";
+  const spec = await parser.dereference(path);
 
-  info("OAS Specification loaded. Version: " + (await oas.version()).version);
+  info("OAS Specification loaded: " + spec.info.title + " " + spec.info.version);
 
-  info(JSON.stringify(oas));
   return;
 }
 

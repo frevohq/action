@@ -14,16 +14,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.main = void 0;
 const core_1 = require("@actions/core");
-const oas_normalize_1 = __importDefault(require("oas-normalize"));
+const swagger_parser_1 = __importDefault(require("@apidevtools/swagger-parser"));
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
-        const token = (0, core_1.getInput)("frevo_token", { required: true });
-        const path = (0, core_1.getInput)("path", { required: true });
-        const config = (0, core_1.getInput)("config", { required: false });
-        const oas = new oas_normalize_1.default(path, { enablePaths: true });
-        yield oas.deref();
-        (0, core_1.info)("OAS Specification loaded. Version: " + (yield oas.version()).version);
-        (0, core_1.info)(JSON.stringify(oas));
+        // const token = getInput("frevo_token", { required: true });
+        // const path = getInput("path", { required: true });
+        // const config = getInput("config", { required: false });
+        const path = "./fixture/2-petstore-ref/openapi.yaml";
+        const spec = yield swagger_parser_1.default.dereference(path);
+        (0, core_1.info)("OAS Specification loaded: " + spec.info.title + " " + spec.info.version);
         return;
     });
 }
