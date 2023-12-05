@@ -13,14 +13,20 @@ jobs:
       - run: npm install
       - run: npm run build
 
-      - name: "1"
+      - name: "Simple"
         uses: ./
         with:
           frevo_token: "test"
           path: "./fixture/1-petstore/openapi.json"
 
-      - name: "2"
+      - name: "Unbundled"
         uses: ./
         with:
           frevo_token: "test"
           path: "./fixture/2-petstore-ref/openapi.yaml"
+
+      - name: "Stripe"
+        uses: ./
+        with:
+          frevo_token: "test"
+          path: "./fixture/3-stripe/openapi.json"

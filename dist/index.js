@@ -15,14 +15,39 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.main = void 0;
 const core_1 = require("@actions/core");
 const swagger_parser_1 = __importDefault(require("@apidevtools/swagger-parser"));
+const pako_1 = __importDefault(require("pako"));
+const getSizeInMB = (data) => {
+    const sizeInBytes = Buffer.byteLength(JSON.stringify(data), "utf8");
+    return (sizeInBytes / (1024 * 1024)).toFixed(2);
+};
+const debug = (message) => (0, core_1.debug)(`[frevo] ${message}`);
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
-        // const token = getInput("frevo_token", { required: true });
-        // const path = getInput("path", { required: true });
-        // const config = getInput("config", { required: false });
-        const path = "./fixture/2-petstore-ref/openapi.yaml";
-        const spec = yield swagger_parser_1.default.dereference(path);
-        (0, core_1.info)("OAS Specification loaded: " + spec.info.title + " " + spec.info.version);
+        const token = (0, core_1.getInput)("frevo_token", { required: true });
+        const path = (0, core_1.getInput)("path", { required: true });
+        const config = (0, core_1.getInput)("config", { required: false });
+        // Uncomment for local testing
+        // const path = "./fixture/2-petstore-ref/openapi.yaml";
+        // const path = "./fixture/3-stripe/openapi.json";
+        debug(`path: ${path}`);
+        const spec = yield swagger_parser_1.default.bundle(path, {});
+        debug(`total spec size ${getSizeInMB(spec)} MB`);
+        debug(`compressing`);
+        const str = JSON.stringify(spec);
+        const uint8 = new TextEncoder().encode(str);
+        const body = pako_1.default.gzip(uint8);
+        debug(`compressing done`);
+        debug(`uploading`);
+        const response = yield fetch("https://frevo-api-30.localcan.dev/api/openapi", {
+            method: "POST",
+            body,
+            headers: {
+                "Content-Encoding": "gzip",
+                "Content-Type": "application/json",
+                "Content-Length": body.length.toString(),
+            },
+        });
+        debug(`uploading done, ok=${response.ok} status=${response.statusText}`);
         return;
     });
 }
