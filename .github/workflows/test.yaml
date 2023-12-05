@@ -12,7 +12,15 @@ jobs:
       - uses: actions/checkout@v3
       - run: npm install
       - run: npm run build
-      - uses: ./
+
+      - name: "1"
+        uses: ./
         with:
           frevo_token: "test"
           path: "./fixture/1-petstore/openapi.json"
+
+      - name: "2"
+        uses: ./
+        with:
+          frevo_token: "test"
+          path: "./fixture/2-petstore-ref/openapi.yaml"
