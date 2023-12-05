@@ -12,6 +12,7 @@ export async function main() {
 
   info("OAS Specification loaded. Version: " + (await oas.version()).version);
 
+  info(JSON.stringify(oas));
   return;
 }
 

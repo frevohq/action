@@ -23,6 +23,7 @@ function main() {
         const oas = new oas_normalize_1.default(path, { enablePaths: true });
         yield oas.load();
         (0, core_1.info)("OAS Specification loaded. Version: " + (yield oas.version()).version);
+        (0, core_1.info)(JSON.stringify(oas));
         return;
     });
 }
