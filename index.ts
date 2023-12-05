@@ -1,6 +1,7 @@
 import { getInput, info, debug as actionDebug } from "@actions/core";
 import parser from "@apidevtools/swagger-parser";
 import pako from "pako";
+import fetch from "node-fetch";
 
 const getSizeInMB = (data: Record<string, any>) => {
   const sizeInBytes = Buffer.byteLength(JSON.stringify(data), "utf8");
@@ -10,13 +11,13 @@ const getSizeInMB = (data: Record<string, any>) => {
 const debug = (message: string) => actionDebug(`[frevo] ${message}`);
 
 export async function main() {
-  const token = getInput("frevo_token", { required: true });
-  const path = getInput("path", { required: true });
-  const config = getInput("config", { required: false });
+  let token = getInput("frevo_token", { required: true });
+  let path = getInput("path", { required: true });
+  let config = getInput("config", { required: false });
 
   // Uncomment for local testing
-  // const path = "./fixture/2-petstore-ref/openapi.yaml";
-  // const path = "./fixture/3-stripe/openapi.json";
+  // let path = "./fixture/2-petstore-ref/openapi.yaml";
+  // let path = "./fixture/3-stripe/openapi.json";
 
   debug(`path: ${path}`);
   const spec = await parser.bundle(path, {});
@@ -25,7 +26,7 @@ export async function main() {
   debug(`compressing`);
   const str = JSON.stringify(spec);
   const uint8 = new TextEncoder().encode(str);
-  const body = pako.gzip(uint8);
+  const body = pako.gzip(uint8) as any;
   debug(`compressing done`);
 
   debug(`uploading`);
