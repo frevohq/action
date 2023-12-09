@@ -16,6 +16,7 @@ export async function main() {
   let config = getInput("config", { required: false });
 
   // Uncomment for local testing
+  // let token = "";
   // let path = "./fixture/2-petstore-ref/openapi.yaml";
   // let path = "./fixture/3-stripe/openapi.json";
 
@@ -30,13 +31,14 @@ export async function main() {
   debug(`compressing done`);
 
   debug(`uploading`);
-  const response = await fetch("https://frevo-api-30.localcan.dev/api/openapi", {
+  const response = await fetch("https://frevo-api-69.localcan.dev/openapi", {
     method: "POST",
     body,
     headers: {
       "Content-Encoding": "gzip",
       "Content-Type": "application/json",
       "Content-Length": body.length.toString(),
+      Authorization: `Bearer ${token}`,
     },
   });
   debug(`uploading done, ok=${response.ok} status=${response.statusText}`);

@@ -28,6 +28,7 @@ function main() {
         let path = (0, core_1.getInput)("path", { required: true });
         let config = (0, core_1.getInput)("config", { required: false });
         // Uncomment for local testing
+        // let token = "";
         // let path = "./fixture/2-petstore-ref/openapi.yaml";
         // let path = "./fixture/3-stripe/openapi.json";
         debug(`path: ${path}`);
@@ -39,13 +40,14 @@ function main() {
         const body = pako_1.default.gzip(uint8);
         debug(`compressing done`);
         debug(`uploading`);
-        const response = yield (0, undici_1.fetch)("https://frevo-api-30.localcan.dev/api/openapi", {
+        const response = yield (0, undici_1.fetch)("https://frevo-api-69.localcan.dev/openapi", {
             method: "POST",
             body,
             headers: {
                 "Content-Encoding": "gzip",
                 "Content-Type": "application/json",
                 "Content-Length": body.length.toString(),
+                Authorization: `Bearer ${token}`,
             },
         });
         debug(`uploading done, ok=${response.ok} status=${response.statusText}`);
