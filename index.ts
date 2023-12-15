@@ -1,4 +1,4 @@
-import { getInput, info, debug as actionDebug } from '@actions/core';
+import { getInput, info, debug as actionDebug, error } from '@actions/core';
 import parser from '@apidevtools/swagger-parser';
 import pako from 'pako';
 import { fetch } from 'undici';
@@ -37,6 +37,10 @@ export async function main() {
     },
   });
   debug(`uploading done, ok=${response.ok} status=${response.statusText}`);
+
+  if (!response.ok) {
+    error(`Error uploading spec: ${response.statusText}`);
+  }
 
   return;
 }

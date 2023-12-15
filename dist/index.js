@@ -47,6 +47,9 @@ function main() {
             },
         });
         debug(`uploading done, ok=${response.ok} status=${response.statusText}`);
+        if (!response.ok) {
+            (0, core_1.error)(`Error uploading spec: ${response.statusText}`);
+        }
         return;
     });
 }
