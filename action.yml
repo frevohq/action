@@ -1,4 +1,4 @@
-name: Frevo
+name: Frevo | Deploy OpenAPI specification
 description: Deploy yout OpenAPI specification to Frevo
 branding:
   icon: book-open
@@ -10,11 +10,11 @@ inputs:
   path:
     required: true
     description: Path to your OpenAPI specification
-    default: "./openapi.json"
+    default: './openapi.json'
   frevo_token:
     required: true
-    description: Your organization's token in Frevo
+    description: Your project's token in Frevo
   config:
     required: false
     description: Path to your Frevo configuration file
-    default: "./frevo.yaml"
+    default: './frevo.yaml'
