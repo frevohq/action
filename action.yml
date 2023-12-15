@@ -13,7 +13,7 @@ inputs:
     default: "./openapi.json"
   frevo_token:
     required: true
-    description: Your organization's token in Frevo
+    description: Your project's token in Frevo
   config:
     required: false
     description: Path to your Frevo configuration file
