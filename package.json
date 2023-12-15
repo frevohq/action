@@ -27,5 +27,10 @@
   },
   "volta": {
     "node": "18.19.0"
+  },
+  "prettier": {
+    "printWidth": 120,
+    "singleQuote": true,
+    "trailingComma": "all"
   }
 }
