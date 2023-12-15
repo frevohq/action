@@ -20,11 +20,11 @@ jobs:
           frevo_token: ${{ secrets.FREVO_TOKEN_1 }}
           path: './fixture/1-petstore/openapi.json'
 
-      # - name: 'Unbundled'
-      #   uses: ./
-      #   with:
-      #     frevo_token: 'test'
-      #     path: './fixture/2-petstore-ref/openapi.yaml'
+      - name: 'Unbundled'
+        uses: ./
+        with:
+          frevo_token: ${{ secrets.FREVO_TOKEN_2 }}
+          path: './fixture/2-petstore-ref/openapi.yaml'
 
       # - name: 'Stripe'
       #   uses: ./
